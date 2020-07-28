@@ -51,10 +51,6 @@ void run_stu(void)
 {
 	int num1,snum=0;
 	char num2[10];
-<<<<<<< HEAD
-=======
-	printf("欢迎进入学生管理系统！");
->>>>>>> 65b7d205e0f4bed5387852e980be8df26c3ea566
 	printf("输入学号:");
 	scanf("%d",&num1);
 	printf("输入密码:");

@@ -10,7 +10,8 @@ void change(int i)
 	printf("请输入修改后密码\n");
 	scanf("%d",&n);
 	printf("修改成功！\n");	
-	tch_key[i]=n;
+	tch.key[i]=n;
+	tch_num[i]=1;
 	fflush(stdout);		
 	usleep(1000000);
 	}
@@ -22,7 +23,7 @@ int tch_sign(void)
 	int id,key;
 	scanf("%d%d",&id,&key);
 	int i=0,j=0;
-	while(tch_id[i]!=id && i<100)
+	while(tch.id[i]!=id && i<100)
 	{
 		i++;
 		}
@@ -35,7 +36,7 @@ int tch_sign(void)
 	}
 	else
 	{
-		if(tch_key[i]==0)
+		if(tch.key[i]==0)
 		{
 			printf("该账户已锁定，请找校长解锁\n");
 			fflush(stdout);
@@ -44,9 +45,9 @@ int tch_sign(void)
 			}
 		else
 		{
-			if(tch_true[i]<3)
+			if(tch_chance[i]<3)
 			{
-				if(tch_key[i]==key)
+				if(tch.key[i]==key)
 				{
 					printf("登录成功！\n")
 					fflush(stdout);
@@ -55,21 +56,22 @@ int tch_sign(void)
 					{
 						change(i);
 						}
+					tch_chance[i]=0;
 					return 1;
 				}
 				else
 				{
-					printf("密码错误，还有%d次机会\n",2-tch_true[i]);
+					printf("密码错误，还有%d次机会\n",2-tch_chance[i]);
 					fflush(stdout);
 					usleep(1000000);
-					tch_true[i]++;
+					tch_chance[i]++;
 					return 0;
 				}
 			}
 		}
 	}
 	printf("该账户已锁定，请找校长解锁\n");
-	tch_key[i]=0;
+	tch.key[i]=0;
 	return 0;
 }
 void tch_show()

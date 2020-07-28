@@ -1,4 +1,4 @@
-
+#include "tch_fun.h"
 int stu_reset(void)
 {
 	system("clear");
@@ -7,7 +7,7 @@ int stu_reset(void)
 	int id,key;
 	int i=0;
 	scanf("%d",&id);
-	while(id!=stu_id[i] && i<100)
+	while(id!=stu.ID[i] && i<100)
 	{
 		i++;
 		}
@@ -20,7 +20,7 @@ int stu_reset(void)
 		}
 	printf("请输入修改后的密码\n");
 	scanf("%d",&key);
-	stu_key[i]=key;
+	stu.pw[i]=key;
 	printf("修改成功！\n")
 	fflush(stdout);
 	usleep(1000000);
@@ -32,16 +32,16 @@ void tch_show_in(void)
 	printf("----------教师管理系统----------\n");
 	for(int i=0;i<100;i++)
 	{
-		while(stu_id)
+		while(stu.ID)
 		{
-			printf("%s %s %d %d %d %d\n",stu_name,stu_sex,stu_id,stu_chinese,stu_math,stu_english);
+			printf("%s %s %d %d %d %d\n",stu.name,stu.sex,stu.ID,stu.Chinese,stu.Math,stu.English);
 			}
 		}
 void stu_show_out(void)
 {
 	system("clear");
 	printf("----------教师管理系统----------\n");
-	FILE *fp=fopen("tuuixue.txt","r");
+	FILE *fp=fopen("tuixue.txt","r");
 	char name[100][20]={0};
 	char sex[100]{0};
 	int id[100]={0};

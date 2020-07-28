@@ -10,7 +10,7 @@ typedef struct teacher
 	char sex[100];
 	int id[100];
 	int key[100];
-	}teacher;
+	};
 teacher tch;
 void stu_add(void);
 void stu_del(void);
