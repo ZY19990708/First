@@ -1,5 +1,6 @@
 #include"tch_tools.h"
 #include"student.h"
+extern Student stu;
 static int stu_count=0;
 
 void stu_add(void)
@@ -75,9 +76,9 @@ void stu_find(void)
 	int i;
 	for(i=0;i<100;i++)
 	{
-		if(stu.sex[i]&&(strstr(stu.ame[i],key)))
+		if(stu.sex[i]&&(strstr(stu.name[i],key)))
 		{
-			printf("%s %s %d %d %d %d\n",stu.name[i],'w'==stu.sex[i]?"女":"男",stu.ID[i],stu.chi[i],stu.math[i],stu.eng[i]);	
+			printf("%s %s %d %d %d %d\n",stu.name[i],'w'==stu.sex[i]?"女":"男",stu.ID[i],stu.Chinese[i],stu.Math[i],stu.English[i]);	
 		}	
 	}
 	stdin->_IO_read_ptr=stdin->_IO_read_end;
@@ -95,7 +96,7 @@ void stu_modify(void)
 		if(stu.sex[i]&&0==strcmp(stu.name[i],key))
 		{
 			printf("输入修改后的信息：");
-			scanf("%s %c %d %d %d %d",stu.name[i],stu.sex+i,&stu.num[i],&stu.chi[i],&stu.math[i],&stu.eng[i]);
+			scanf("%s %c %d %d %d %d",stu.name[i],stu.sex+i,&stu.ID[i],&stu.Chinese[i],&stu.Math[i],&stu.English[i]);
 			printf("修改成功。\n");
 			return;
 		}
@@ -113,7 +114,7 @@ void stu_score(void)
 		if(stu.sex[i]&&0==strcmp(stu.name[i],key))
 		{
 			printf("输入需要录入的成绩：");
-			scanf("%s %d %d %d",stu.name[i],&stu.chi[i],&stu.math[i],&stu.eng[i]);
+			scanf("%s %d %d %d",stu.name[i],&stu.Chinese[i],&stu.Math[i],&stu.English[i]);
 			printf("录入%s成绩成功。\n",stu.name[i]);
 			return;
 		}
