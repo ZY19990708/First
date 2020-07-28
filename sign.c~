@@ -60,7 +60,7 @@ int tch_sign(void)
 					printf("登录成功！\n");
 					fflush(stdout);
 					usleep(1000000);
-					if(tch_num[i]==0)
+					if(tch_num==0)
 					{
 						change(i);
 						}

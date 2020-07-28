@@ -26,7 +26,7 @@ int main(int argc(),const char* argv[])
 		case '6':
 				while(0==stu_reset()){};break;
 		case '7':tch_show_in();break;
-		case '8':tch_show_out();break;
+		case '8':printf("sss");fflush(stdout);usleep(1000000);tch_show_out();break;
 		case '9':return 0;
 		}
 	}
