@@ -1,11 +1,13 @@
 #include"tch_tools.h"
+
 static int stu_count=0;
 static char stu_name[100][20];
 static char stu_sex[100];
-static char stu_num[100][10];
+static int stu_num[100];
 static int stu_chi[100];
 static int stu_math[100];
 static int stu_eng[100];
+
 void stu_add(void)
 {
 	if(stu_count>=100)
@@ -18,18 +20,19 @@ void stu_add(void)
 	while(stu_sex[i]) i++;
 	printf("请输入学生姓名 性别：");
 	scanf("%s %c",stu_name[i],stu_sex+i);
-	stu_num[i]=stu_count+1;	
+	stu_num[i]=stu_count+1;		//自动生成学号
 	stu_count++;
 	/* 
 
 
-		批量添加学生
+		批量导入学生
 	
 
 	*/
 }
 void stu_del(void)
 {
+	FILE *fp=fopen("tuixue.txt","a");  //删除信息的学生保存在退学文件中
 	char i=0;
 	char key[20]={};
 	printf("请输入要删除的学生信息：");
@@ -38,20 +41,12 @@ do
 	{
 		if (stu_sex[i])
 		{
-			if(isdigit(key[0]))
-			{
-				if(0==strcmp(stu_num[i],key))
-				{
-					break;
-				}
-			}
-			else
-			{
+			
 				if(0==strcmp(stu_name[i],key))
 				{
 					break;
 				}
-			}
+			
 			
 		}
 	}while(++i<100);
@@ -65,9 +60,9 @@ do
 			printf("删除%s的信息成功。\n",stu_name[i]);
 			stu_sex[i]=0;
 			stu_count--;			
-			FILE *fp=fopen("tuixue.txt","a");
+			
 			fprintf(fp,"%s ",stu_name[i]);
-			int fclose(fp);
+			
 
  
 		}
@@ -76,6 +71,7 @@ do
 	{
 		printf("没有此学生。");
 	}
+			fclose(fp);
 }
 void stu_find(void)
 {
@@ -85,9 +81,9 @@ void stu_find(void)
 	int i;
 	for(i=0;i<100;i++)
 	{
-		if(stu_sex[i]&&(strstr(stu_name[i],key)||strstr(stu_num[i],key)))
+		if(stu_sex[i]&&(strstr(stu_name[i],key)))
 		{
-			printf("%s %s %s %d %d %d\n",stu_name[i],'w'==stu_sex[i]?"女":"男",stu_num[i],stu_chi[i],stu_math[i],stu_eng[i]);	
+			printf("%s %s %d %d %d %d\n",stu_name[i],'w'==stu_sex[i]?"女":"男",stu_num[i],stu_chi[i],stu_math[i],stu_eng[i]);	
 		}	
 	}
 	stdin->_IO_read_ptr=stdin->_IO_read_end;
@@ -105,7 +101,7 @@ void stu_modify(void)
 		if(stu_sex[i]&&0==strcmp(stu_name[i],key))
 		{
 			printf("输入修改后的信息：");
-			scanf("%s %c %s %d %d %d",stu_name[i],stu_sex+i,stu_num[i],stu_chi[i],stu_math[i],stu_eng[i]);
+			scanf("%s %c %d %d %d %d",stu_name[i],stu_sex+i,&stu_num[i],&stu_chi[i],&stu_math[i],&stu_eng[i]);
 			printf("修改成功。\n");
 			return;
 		}
@@ -123,7 +119,7 @@ void stu_score(void)
 		if(stu_sex[i]&&0==strcmp(stu_name[i],key))
 		{
 			printf("输入需要录入的成绩：");
-			scanf("%s %d %d %d",stu_name[i],stu_chi[i],stu_math[i],stu_eng[i]);
+			scanf("%s %d %d %d",stu_name[i],&stu_chi[i],&stu_math[i],&stu_eng[i]);
 			printf("录入%s成绩成功。\n",stu_name[i]);
 			return;
 		}
