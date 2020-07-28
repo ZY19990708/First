@@ -1,9 +1,9 @@
 #include"tch_tools.h"
 #include"student.h"
 extern Student stu;
-static int stu_count=0;
+static int stu_count=0;//记录学生数
 
-void stu_add(void)
+void stu_add(void)//添加学生
 {
 	if(stu_count>=100)
 		{
@@ -20,15 +20,15 @@ void stu_add(void)
 	/* 
 
 
-		批量导入学生
+		批量导入学生还没写
 	
 
 	*/
 }
 void stu_del(void)
 {
-	FILE *fp=fopen("tuixue.txt","a");  //删除信息的学生保存在退学文件中
-	char i=0;
+	FILE *fp=fopen("tuixue.txt","a");  //删除信息的学生保存在一个“退学”文件中
+	char i=0;					//比对信息
 	char key[20]={};
 	printf("请输入要删除的学生信息：");
 	scanf("%s",key);
@@ -54,7 +54,7 @@ do
 		{		
 			printf("删除%s的信息成功。\n",stu.name[i]);
 			stu.sex[i]=0;
-			stu.count--;			
+			stu_count--;			
 			
 			fprintf(fp,"%s ",stu.name[i]);
 			
@@ -66,9 +66,9 @@ do
 	{
 		printf("没有此学生。");
 	}
-			fclose(fp);
+			fclose(fp);   //退出文件
 }
-void stu_find(void)
+void stu_find(void)//查找学生
 {
 	char key[20]={};
 	printf("请输入查询关键字：");
@@ -85,7 +85,7 @@ void stu_find(void)
 	puts("任意键继续。");
 	getch();
 }
-void stu_modify(void)
+void stu_modify(void)//修改学生信息
 {
 	char key[20]={};
 	printf("输入修改的学生姓名：");
@@ -103,7 +103,7 @@ void stu_modify(void)
 	}
 	printf("未找到此学生。\n");
 }
-void stu_score(void)
+void stu_score(void)//录入成绩
 {
 	char key[20]={};
 	printf("输入录入成绩的学生姓名：");
@@ -120,5 +120,9 @@ void stu_score(void)
 		}
 	}
 	printf("未找到此学生。\n");
-	/*批量录入*/
+	/*
+
+		批量导入还没写
+	
+	*/
 }
