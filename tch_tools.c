@@ -17,7 +17,7 @@ void stu_add(void)//添加学生
 	scanf("%s %c",stu.name[i],stu.sex+i);
 	stu.ID[i]=stu_xh+1;		//自动生成学号
 	stu_count++;
-	printf("sccg");
+	printf("添加成功。");
 	fflush(stdout);
 	usleep(500000);
 	/* 
@@ -31,16 +31,16 @@ void stu_add(void)//添加学生
 void stu_del(void)
 {
 	FILE *fp=fopen("tuixue.txt","a");  //删除信息的学生保存在一个“退学”文件中
-	char i=0;					//比对信息
-	char key[20]={};
-	printf("请输入要删除的学生信息：");
-	scanf("%s",key);
+	int i=0;					//比对信息
+	int key;
+	printf("请输入要删除的学生学号：");
+	scanf("%d",&key);
 do
 	{
 		if (stu.sex[i])
 		{
 			
-				if(0==strcmp(stu.name[i],key))
+				if(stu.ID[i]==key)
 				{
 					break;
 				}
@@ -50,13 +50,12 @@ do
 	}while(++i<100);
 	if(i<100)
 	{
-		char key1[20]={};
-		printf("请再输入一遍，确认要删除的学生信息：");
-		scanf("%s",key1);
+		int key1;
+		printf("请再输入一遍，确认要删除的学生学号：");
+		scanf("%d",&key1);
 		if(key==key1)
 		{		
 			printf("删除%s的信息成功。\n",stu.name[i]);
-		
 			fflush(stdout);
 			usleep(500000);
 			stu.sex[i]=0;
@@ -87,7 +86,7 @@ void stu_find(void)//查找学生
 	{
 		if(stu.sex[i]&&(strstr(stu.name[i],key)))
 		{
-			printf("%s %s %d %d %d %d\n",stu.name[i],'w'==stu.sex[i]?"女":"男",stu.ID[i],stu.Chinese[i],stu.Math[i],stu.English[i]);	
+			printf("%s %s %d 语文：%d 数学：%d 英语：%d\n",stu.name[i],'w'==stu.sex[i]?"女":"男",stu.ID[i],stu.Chinese[i],stu.Math[i],stu.English[i]);	
 		}	
 	}
 	stdin->_IO_read_ptr=stdin->_IO_read_end;
@@ -104,7 +103,7 @@ void stu_modify(void)//修改学生信息
 	{
 		if(stu.sex[i]&&0==strcmp(stu.name[i],key))
 		{
-			printf("输入修改后的信息：");
+			printf("输入修改后的信息（姓名、性别、学号、语文、数学和英语成绩：");
 			scanf("%s %c %d %d %d %d",stu.name[i],stu.sex+i,&stu.ID[i],&stu.Chinese[i],&stu.Math[i],&stu.English[i]);
 			printf("修改成功。\n");
 			
@@ -129,7 +128,7 @@ void stu_score(void)//录入成绩
 		if(stu.sex[i]&&0==strcmp(stu.name[i],key))
 		{
 			printf("输入需要录入的成绩：");
-			scanf("%s %d %d %d",stu.name[i],&stu.Chinese[i],&stu.Math[i],&stu.English[i]);
+			scanf("%d %d %d ",&stu.Chinese[i],&stu.Math[i],&stu.English[i]);
 			printf("录入%s成绩成功。\n",stu.name[i]);
 			
 			fflush(stdout);
