@@ -15,7 +15,7 @@ void stu_add(void)//添加学生
 	while(stu.sex[i]) i++;
 	printf("请输入学生姓名 性别：");
 	scanf("%s %c",stu.name[i],stu.sex+i);
-	stu.ID[i]=stu_xh+1;		//自动生成学号
+	stu.ID[i]=stu_xh++;		//自动生成学号
 	stu_count++;
 	printf("添加成功。");
 	fflush(stdout);
@@ -61,7 +61,7 @@ do
 			stu.sex[i]=0;
 			stu_count--;			
 			
-			fprintf(fp,"%s ",stu.name[i]);
+			fprintf(fp,"%s %c %d",stu.name[i],stu.sex[i],stu.ID[i]);
 			
 
  
@@ -103,8 +103,8 @@ void stu_modify(void)//修改学生信息
 	{
 		if(stu.sex[i]&&0==strcmp(stu.name[i],key))
 		{
-			printf("输入修改后的信息（姓名、性别、学号、语文、数学和英语成绩：");
-			scanf("%s %c %d %d %d %d",stu.name[i],stu.sex+i,&stu.ID[i],&stu.Chinese[i],&stu.Math[i],&stu.English[i]);
+			printf("输入修改后的信息（姓名、性别、语文、数学和英语成绩：");
+			scanf("%s %c %d %d %d",stu.name[i],stu.sex+i,&stu.Chinese[i],&stu.Math[i],&stu.English[i]);
 			printf("修改成功。\n");
 			
 			fflush(stdout);
