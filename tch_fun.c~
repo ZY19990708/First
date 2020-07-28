@@ -53,8 +53,8 @@ void tch_show_out(void)
 	{
 		fscanf(fp,"%s %c%d",name[i],&sex[i],&id[i]);
 		printf("%s %c %d\n",name[i],sex[i],id[i]);
+		fflush(stdout);
+		usleep(1000000);
 		i++;
 		}
-	printf("按任意键继续");
-	getchar();
 	}
