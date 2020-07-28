@@ -53,21 +53,16 @@ do
 		if(key==key1)
 		{		
 			printf("删除%s的信息成功。\n",stu.name[i]);
-			fprintf(fp,"%s %c %d",stu.name[i],stu.sex[i],stu.ID[i]);
 			fflush(stdout);
 			usleep(500000);
 			fprintf(fp,"%s %c %d ",stu.name[i],stu.sex[i],stu.ID[i]);
 			stu.sex[i]=0;
-<<<<<<< HEAD
-			stu_count--;	
-=======
 			stu_count--;			
 			
 			
 			
 
  
->>>>>>> 6367c08a5cdd424fc9c17c78405a97137a9de202
 		}
 	}
 	else
@@ -107,7 +102,7 @@ void stu_modify(void)//修改学生信息
 		if(stu.sex[i]&&0==strcmp(stu.name[i],key))
 		{
 			printf("输入修改后的信息（姓名、性别、语文、数学和英语成绩：");
-			scanf("%s %c %d %d %d ",stu.name[i],stu.sex+i,&stu.Chinese[i],&stu.Math[i],&stu.English[i]);
+			scanf("%s %c %d %d %d",stu.name[i],stu.sex+i,&stu.Chinese[i],&stu.Math[i],&stu.English[i]);
 			printf("修改成功。\n");
 			
 			fflush(stdout);
