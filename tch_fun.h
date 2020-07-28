@@ -1,3 +1,4 @@
+#include <stdio.h>
 #ifndef TCH_FUN_H
 #define TCH_FUN_H
 int stu_reset(void);

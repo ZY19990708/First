@@ -1,18 +1,21 @@
-#include <getch.h>
+#include "tch_fun.h"
 #include "sign.h"
+#include "tch_tools.h"
+#include "student.h"
+int tch_num[100]={0};//判断老师是否第一次登录;
+int tch_chance[100]={0};
 int main(int argc(),const char* argv[])
 {
-	tch_true[100]={0};
 	while(0==tch_sign())
 	{}
 	tch_show();
 	switch(getch())
 	{
-		case 1:tch_add();break;
-		case 2:tch_del();break;
-		case 3:tch_search();break;
-		case 4:tch_revise();break;
-		case 5:tch_input();break;
+		case 1:stu_add();break;
+		case 2:stu_del();break;
+		case 3:stu_find();break;
+		case 4:stu_modify();break;
+		case 5:stu_score();break;
 		case 6:
 				while(0==stu_reset()){};break;
 		case 7:tch_show_in();break;

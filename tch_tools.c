@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include<string.h>
-#include<ctype.h>
 #include"tch_tools.h"
-#include<getch.h>
 static int stu_count=0;
 static char stu_name[100][20];
 static char stu_sex[100];
