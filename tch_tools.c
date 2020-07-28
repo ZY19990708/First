@@ -4,7 +4,7 @@ extern Student stu;
 static int stu_count=0;//记录学生数
 static int stu_xh=10000;
 void stu_add(void)//添加学生
-{
+{	
 	if(stu_count>=100)
 		{
 			printf("超出学生人数限制。");
@@ -20,15 +20,12 @@ void stu_add(void)//添加学生
 	printf("添加成功。");
 	fflush(stdout);
 	usleep(500000);
-	/* 
 	
-
-		批量导入学生还没写
 	
-
-	*/
 }
-void stu_del(void)
+
+
+void stu_del(void)//删除学生
 {
 	FILE *fp=fopen("tuixue.txt","a");  //删除信息的学生保存在一个“退学”文件中
 	int i=0;					//比对信息
@@ -58,7 +55,7 @@ do
 			printf("删除%s的信息成功。\n",stu.name[i]);
 			fflush(stdout);
 			usleep(500000);
-			fprintf(fp,"%s %c %d",stu.name[i],stu.sex[i],stu.ID[i]);
+			fprintf(fp,"%s %c %d ",stu.name[i],stu.sex[i],stu.ID[i]);
 			stu.sex[i]=0;
 			stu_count--;			
 			
@@ -141,9 +138,55 @@ void stu_score(void)//录入成绩
 	
 	fflush(stdout);
 	usleep(500000);
-	/*
 
-		批量导入还没写
+}
+void stu_add2(void)
+{
 	
-	*/
+	FILE *fp=fopen("xingming.txt","r");
+	int i =0;
+	while(!feof(fp))
+	{
+		
+	while(stu.sex[i]) i++;
+	fscanf(fp,"%s %c",stu.name[i],&stu.sex[i]);	
+	stu.ID[i]=stu_xh++;		//自动生成学号
+	stu_count++;
+	
+	if(stu_count>=100)
+		{
+			printf("超出学生人数限制。");
+			fflush(stdout);
+			usleep(1000000);			
+			return;
+		}	
+	}	
+		printf("录入完成！\n");
+		fflush(stdout);
+			usleep(1000000);	
+			return;
+}
+void stu_score2(void)
+{
+	FILE *fp=fopen("chengji.txt","r");
+	int i=0;
+	char name[100][20]={};
+	while(!feof(fp))
+	{	
+		int j=0;
+		fscanf(fp,"%s",name[i]);
+		while(0!=ctrcmp(name[i],stu.name[j]) && j<100)j++;			
+		if(j==100)
+		{
+			printf("姓名有误！\n");
+			fflush(stdout);
+			usleep(1000000);	
+			return;
+		}
+	fscanf(fp,"%d %d %d",&stu.Chinese[i],&stu.Math[i],&stu.English);				
+	}
+	printf("录入完成！\n");
+	fflush(stdout);
+			usleep(1000000);	
+			return;
 }
