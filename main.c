@@ -4,6 +4,7 @@
 #include "student.h"
 int tch_num[100]={0};//判断老师是否第一次登录;
 int tch_chance[100]={0};
+struct teacher tch;
 int main(int argc(),const char* argv[])
 {
 	while(0==tch_sign())
@@ -19,7 +20,7 @@ int main(int argc(),const char* argv[])
 		case 6:
 				while(0==stu_reset()){};break;
 		case 7:tch_show_in();break;
-		case 8:tch_show_put();break;
+		case 8:tch_show_out();break;
 		case 9:return 0;
 		}
 	

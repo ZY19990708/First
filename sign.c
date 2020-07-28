@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include "sign.h"
+#include "tch_fun.h"
+extern struct teacher tch;
+extern int tch_num[];
+extern int tch_chance[];
 void change(int i)
 {
 	system("clear");
@@ -49,7 +53,7 @@ int tch_sign(void)
 			{
 				if(tch.key[i]==key)
 				{
-					printf("登录成功！\n")
+					printf("登录成功！\n");
 					fflush(stdout);
 					usleep(1000000);
 					if(tch_num==0)
@@ -87,5 +91,4 @@ void tch_show()
 	printf("7.显示所有在校学生信息\n");
 	printf("8.显示所有退出学生信息\n");
 	printf("9.退出\n");
-	}
-	}
+}

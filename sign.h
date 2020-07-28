@@ -1,3 +1,4 @@
+#include <unistd.h>
 #ifndef SIGN_H
 #define SIGN_H
 int tch_sign(void); 
