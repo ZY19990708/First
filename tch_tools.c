@@ -58,10 +58,11 @@ do
 			printf("删除%s的信息成功。\n",stu.name[i]);
 			fflush(stdout);
 			usleep(500000);
+			fprintf(fp,"%s %c %d",stu.name[i],stu.sex[i],stu.ID[i]);
 			stu.sex[i]=0;
 			stu_count--;			
 			
-			fprintf(fp,"%s %c %d",stu.name[i],stu.sex[i],stu.ID[i]);
+			
 			
 
  
