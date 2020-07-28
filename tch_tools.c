@@ -59,8 +59,18 @@ do
 			fprintf(fp,"%s %c %d",stu.name[i],stu.sex[i],stu.ID[i]);
 			fflush(stdout);
 			usleep(500000);
+			fprintf(fp,"%s %c %d",stu.name[i],stu.sex[i],stu.ID[i]);
 			stu.sex[i]=0;
+<<<<<<< HEAD
 			stu_count--;	
+=======
+			stu_count--;			
+			
+			
+			
+
+ 
+>>>>>>> 6367c08a5cdd424fc9c17c78405a97137a9de202
 		}
 	}
 	else
