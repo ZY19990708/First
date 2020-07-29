@@ -125,8 +125,8 @@ void stu_score(void)//录入成绩
 	{
 		if(stu.sex[i]&&0==strcmp(stu.name[i],key))
 		{
-			printf("输入需要录入的成绩：");
-			scanf("%d %d %d ",&stu.Chinese[i],&stu.Math[i],&stu.English[i]);
+			printf("输入需要录入的成绩(语文 数学 英语)：");
+			scanf("%d%d%d",&stu.Chinese[i],&stu.Math[i],&stu.English[i]);
 			printf("录入%s成绩成功。\n",stu.name[i]);
 			
 			fflush(stdout);
@@ -142,8 +142,10 @@ void stu_score(void)//录入成绩
 }
 void stu_add2(void)
 {
-	
-	FILE *fp=fopen("xingming.txt","r");
+	printf("请输入文件路径");
+	char filename[100];
+	scanf("%s",filename);
+	FILE *fp=fopen(filename,"r");
 	int i =0;
 	while(!feof(fp))
 	{
@@ -168,14 +170,18 @@ void stu_add2(void)
 }
 void stu_score2(void)
 {
-	FILE *fp=fopen("chengji.txt","r");
+	printf("请输入文件路径");
+	char filename[100];
+	scanf("%s",filename);
+	FILE *fp=fopen(filename,"r");
 	int i=0;
 	char name[100][20]={};
 	while(!feof(fp))
 	{	
 		int j=0;
 		fscanf(fp,"%s",name[i]);
-		while(0!=ctrcmp(name[i],stu.name[j]) && j<100)j++;			
+		printf("%s\n",name[i]);
+		while(0!=strcmp(name[i],stu.name[j]) && j<100)j++;			
 		if(j==100)
 		{
 			printf("姓名有误！\n");
@@ -183,7 +189,12 @@ void stu_score2(void)
 			usleep(1000000);	
 			return;
 		}
-	fscanf(fp,"%d %d %d",&stu.Chinese[i],&stu.Math[i],&stu.English);				
+		else
+		{
+		fscanf(fp,"%d%d%d",&stu.Chinese[j],&stu.Math[j],&stu.English[j]);
+		printf("%s %d %d %d",name[j],stu.Chinese[j],stu.Math[j],stu.English[j]);			
+		}
+		i++;	
 	}
 	printf("录入完成！\n");
 	fflush(stdout);

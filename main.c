@@ -18,11 +18,24 @@ int main(int argc(),const char* argv[])
 		tch_show();
 	switch(getch())
 	{
-		case '1':stu_add();break;
+		case '1':
+				printf("按1：手动添加\n按2：批量导入\n");
+				switch(getch())
+				{
+					case '1':stu_add();break;
+					case '2':stu_add2();break;
+					}
+				break;
 		case '2':stu_del();break;
 		case '3':stu_find();break;
 		case '4':stu_modify();break;
-		case '5':stu_score();break;
+		case '5':printf("按1：手动添加\n按2：批量导入\n");
+				switch(getch())
+				{
+					case '1':stu_score();break;
+					case '2':stu_score2();break;
+					}
+				break;
 		case '6':
 				while(0==stu_reset()){};break;
 		case '7':tch_show_in();break;
