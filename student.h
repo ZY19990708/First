@@ -12,6 +12,7 @@ typedef struct Student
 	int Math[100];
 	int English[100];
 }Student;
+void anykey_continue(void);
 //查排名
 void find(int num);
 
