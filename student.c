@@ -17,7 +17,7 @@ void find(int num)
 	int max = (stu.Chinese[num]>stu.Math[num]) ? stu.Chinese[num] : stu.Math[num];
 	    max = (max>stu.English[num]) ? max : stu.English[num];
 	int min = (stu.Chinese[num]<stu.Math[num]) ? stu.Chinese[num] : stu.Math[num];
-	    min = (min<stu.English[num]) ? max : stu.English[num];
+	    min = (min<stu.English[num]) ? min : stu.English[num];
 	printf("排名:%d\n平均分:%g\n最高法:%d\n最低分:%d\n",pm,avg,max,min);
 }
 
@@ -38,9 +38,9 @@ void look(int num)
 //显示学生界面
 char menu(void)
 {
-	puts("1.查询排名");
-	puts("2.修改密码");
-	puts("3.查看个人信息");
+	puts("1.查询排名\n");
+	puts("2.修改密码\n");
+	puts("3.查看个人信息\n");
 	char cmd = getch();
 	printf("%c\n",cmd);
 	return cmd;
@@ -49,27 +49,44 @@ char menu(void)
 //进入学生界面
 void run_stu(void)
 {
-	int num1,snum=0;
+	int num1,snum=-1,cnt=0;
 	char num2[10];
-	printf("欢迎进入学生管理系统！");
-	printf("输入学号:");
+	printf("欢迎进入学生管理系统!\n");
+	printf("输入学号:\n");
 	scanf("%d",&num1);
-	printf("输入密码:");
+	printf("输入密码:\n");
 	scanf("%s",num2);
 
 	//判断输入的学号在结构中的位置
-	while(num1 != stu.ID[snum])
+	for(int i=0;i<100;i++)
 	{
-		snum++;
+		if(num1 != stu.ID[snum])
+		{	
+			snum++;
+		}
+		if(num1 == stu.ID[snum])
+		{
+			break;	
+		}
+	}
+	if(snum == 99 && num1 != stu.ID[snum])
+	{
+		printf("无此学生，请寻找教师!");
+		return 0;
 	}
 	for(;;)
 	{
-
+	if(3 == cnt)
+	{
+		printf("三次输入密码错误，请寻找教师!");
+		return 0;
+	}
 	//密码判定
 	if(strcmp(stu.pw[snum],num2)!=0)
 	{
-		printf("密码错误,重新输入密码:");
+		printf("密码错误,重新输入密码:\n");
 		scanf("%s",num2);
+		cnt++;
 	}
 	if(stu.pw[snum] == num2)
 	{
@@ -81,7 +98,7 @@ void run_stu(void)
 	if(0 == stu.pd[snum])
 	{
 		char str[10];
-		printf("重置密码，请输入新密码:");
+		printf("重置密码，请输入新密码:\n");
 		scanf("%s",str);
 		strcpy(stu.pw[snum],str);
 		stu.pd[snum]=1;
