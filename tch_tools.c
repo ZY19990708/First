@@ -1,5 +1,6 @@
-#include"tch_tools.h"
-#include"student.h"
+#include "tch_tools.h"
+#include "student.h"
+#include "sign.h"
 extern Student stu;
 static int stu_count=0;//记录学生数
 static int stu_xh=10000;
@@ -17,9 +18,17 @@ void stu_add(void)//添加学生
 	scanf("%s %c",stu.name[i],stu.sex+i);
 	stu.ID[i]=stu_xh++;		//自动生成学号
 	stu_count++;
-	printf("添加成功。");
+	printf("添加成功。\n");
 	fflush(stdout);
 	usleep(500000);
+	tch_show();
+	printf("1.继续添加\n2.返回\n");
+	getchar();
+	switch(getch())
+	{
+		case '1':stu_add();break;
+		case '2':return;
+		}
 	
 	
 }
@@ -58,11 +67,14 @@ do
 			fprintf(fp,"%s %c %d ",stu.name[i],stu.sex[i],stu.ID[i]);
 			stu.sex[i]=0;
 			stu_count--;			
-			
-			
-			
-
- 
+			tch_show();
+		printf("1.继续删除\n2.返回\n");
+		getchar();
+		switch(getch())
+		{
+			case '1':stu_add();break;
+			case '2':return;
+			}
 		}
 	}
 	else
@@ -138,6 +150,15 @@ void stu_score(void)//录入成绩
 	
 	fflush(stdout);
 	usleep(500000);
+	tch_show();
+	printf("1.继续添加\n2.返回\n");
+	getchar();
+	switch(getch())
+	{
+		case '1':stu_score();break;
+		case '2':return;
+		}
+	
 
 }
 void stu_add2(void)
@@ -146,6 +167,13 @@ void stu_add2(void)
 	char filename[100];
 	scanf("%s",filename);
 	FILE *fp=fopen(filename,"r");
+	if(fp==NULL)
+	{
+		printf("路径有误");
+		fflush(stdout);
+		usleep(500000);	
+		return;	
+	}
 	int i =0;
 	while(!feof(fp))
 	{
@@ -159,14 +187,23 @@ void stu_add2(void)
 		{
 			printf("超出学生人数限制。");
 			fflush(stdout);
-			usleep(1000000);			
+			usleep(500000);			
 			return;
 		}	
 	}	
 		printf("录入完成！\n");
 		fflush(stdout);
-			usleep(1000000);	
-			return;
+			usleep(500000);
+		tch_show();
+		printf("1.继续添加\n2.返回\n");
+		getchar();
+		switch(getch())
+		{
+			case '1':stu_add2();break;
+			case '2':return;
+		}
+		
+		return;
 }
 void stu_score2(void)
 {
@@ -174,30 +211,45 @@ void stu_score2(void)
 	char filename[100];
 	scanf("%s",filename);
 	FILE *fp=fopen(filename,"r");
+	if(fp==NULL)
+	{
+		printf("路径有误");
+		fflush(stdout);
+		usleep(500000);		
+		return;		
+		}
 	int i=0;
 	char name[100][20]={};
 	while(!feof(fp))
 	{	
 		int j=0;
 		fscanf(fp,"%s",name[i]);
-		printf("%s\n",name[i]);
 		while(0!=strcmp(name[i],stu.name[j]) && j<100)j++;			
 		if(j==100)
 		{
 			printf("姓名有误！\n");
 			fflush(stdout);
-			usleep(1000000);	
+			usleep(500000);	
 			return;
 		}
 		else
 		{
 		fscanf(fp,"%d%d%d",&stu.Chinese[j],&stu.Math[j],&stu.English[j]);
-		printf("%s %d %d %d",name[j],stu.Chinese[j],stu.Math[j],stu.English[j]);			
+	
 		}
 		i++;	
 	}
 	printf("录入完成！\n");
 	fflush(stdout);
-			usleep(1000000);	
+			usleep(500000);	
 			return;
+		tch_show();
+	printf("1.继续添加\n2.返回\n");
+	getchar();
+	switch(getch())
+	{
+		case '1':stu_score2();break;
+		case '2':return;
+		}
+	
 }

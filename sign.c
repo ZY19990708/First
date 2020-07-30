@@ -17,7 +17,7 @@ void change(int i)
 	strcpy(tch.key[i],n);
 	tch_num[i]=1;
 	fflush(stdout);		
-	usleep(1000000);
+	usleep(500000);
 	}
 int tch_sign(void)
 {
@@ -39,7 +39,7 @@ int tch_sign(void)
 	{
 		printf("该工号不存在，请再次输入！\n");
 		fflush(stdout);		
-		usleep(1000000);
+		usleep(500000);
 		return 0;
 	}
 	else
@@ -48,7 +48,7 @@ int tch_sign(void)
 		{
 			printf("该账户已锁定，请找校长解锁\n");
 			fflush(stdout);
-			usleep(1000000);
+			usleep(500000);
 			return 0;
 			}
 		else
@@ -59,7 +59,7 @@ int tch_sign(void)
 				{
 					printf("登录成功！\n");
 					fflush(stdout);
-					usleep(1000000);
+					usleep(500000);
 					if(tch_num[i]==0)
 					{
 						change(i);
@@ -71,7 +71,7 @@ int tch_sign(void)
 				{
 					printf("密码错误，还有%d次机会\n",2-tch_chance[i]);
 					fflush(stdout);
-					usleep(1000000);
+					usleep(500000);
 					tch_chance[i]++;
 					return 0;
 				}

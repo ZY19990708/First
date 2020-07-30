@@ -18,7 +18,7 @@ int stu_reset(void)
 	{
 		printf("该学号不存在，请重新输入\n");
 		fflush(stdout);
-		usleep(1000000);
+		usleep(500000);
 		return 0;
 		}
 	printf("请输入修改后的密码\n");
@@ -26,7 +26,7 @@ int stu_reset(void)
 	strcpy(stu.pw[i],key);
 	printf("修改成功！\n");
 	fflush(stdout);
-	usleep(1000000);
+	usleep(500000);
 	return 1;
 	}
 void tch_show_in(void)
@@ -35,7 +35,7 @@ void tch_show_in(void)
 	{
 		if(stu.sex[i])
 		{
-			printf("%s %c %d 语文：%d 数学：%d 英语：%d\n",stu.name[i],stu.sex[i],stu.ID[i],stu.Chinese[i],stu.Math[i],stu.English[i]);
+			printf("%s %s %d 语文：%d 数学：%d 英语：%d\n",stu.name[i],stu.sex[i]=='m'?"男":"女",stu.ID[i],stu.Chinese[i],stu.Math[i],stu.English[i]);
 			}
 		}
 	printf("按任意键继续");
@@ -51,10 +51,11 @@ void tch_show_out(void)
 	int i=0;
 	while(!feof(fp))
 	{
-		fscanf(fp,"%s %c%d",name[i],&sex[i],&id[i]);
-		printf("%s %c %d\n",name[i],sex[i],id[i]);
+		fscanf(fp,"%s %c%d ",name[i],&sex[i],&id[i]);
+		printf("%s %s %d\n",name[i],sex[i]=='m'?"男":"女",id[i]);
 		i++;
 		}
 	printf("按任意键继续");
 	getchar();
+	fclose(fp);
 	}

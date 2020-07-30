@@ -19,22 +19,24 @@ int main(int argc(),const char* argv[])
 	switch(getch())
 	{
 		case '1':
-				printf("按1：手动添加\n按2：批量导入\n");
+				printf("按1：手动添加\n按2：批量导入\n按3：返回\n");
 				switch(getch())
 				{
 					case '1':stu_add();break;
 					case '2':stu_add2();break;
+					case '3':break;
 					}
 				break;
 		case '2':stu_del();break;
 		case '3':stu_find();break;
 		case '4':stu_modify();break;
-		case '5':printf("按1：手动添加\n按2：批量导入\n");
+		case '5':	printf("按1：手动添加\n按2：批量导入\n按3：返回\n");
 				switch(getch())
 				{
 					case '1':stu_score();break;
 					case '2':stu_score2();break;
-					}
+					case '3':break;
+				}
 				break;
 		case '6':
 				while(0==stu_reset()){};break;
@@ -43,4 +45,4 @@ int main(int argc(),const char* argv[])
 		case '9':return 0;
 		}
 	}
-	}
+}
