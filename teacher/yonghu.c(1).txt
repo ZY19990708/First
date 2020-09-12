@@ -1,0 +1,386 @@
+#include <stdio.h>
+#include "yonghu.h"
+void link2();//链接
+account acc;
+void show_str(const char* str,int time)			// 使字符串显示一段时间
+{
+	printf("%s\n",str);
+	usleep(time*1000000);
+}
+void anykey_continue(void)				        //任意键继续
+{
+	stdin->_IO_read_ptr = stdin->_IO_read_end;
+	printf("任意键继续");
+	getchar();
+}
+
+//开户
+
+void kaihu(void)
+{
+	system("clear");
+
+	char name[32];	
+	int j=0;
+	char acc[19];
+	char id[18];
+	int pw1,pw2;
+	int money;
+	
+		while(1 != j)	
+		{
+		    printf("请输入您的姓名：");
+			scanf("%s",name);
+			if(strlen(name)>32||strlen(name)<1)
+			{
+				show_str("姓名非法，请重新输入",0.5);
+				return;		
+			}
+			printf("请输入您的身份证号码：");
+			scanf("%s",id);
+			if(strlen(id)!=18)
+			{
+				show_str("身份证号码非法，请重新输入",0.5);
+				return;
+			}			
+			printf("请输入您的密码:");
+			scanf("%d",&pw1);
+			if(pw1<0||pw1>1000000)
+			{
+				show_str("请输入6位有效密码，请重新输入",0.5);
+				return;			
+			}
+			printf("请再输入一次确认密码\n");
+			scanf("%d",&pw2);
+			if(pw2<0||pw2>1000000)
+			{
+				show_str("请输入6位有效密码，请重新输入",0.5);
+				return;		
+			}
+			if(pw1==pw2)
+			{
+							
+				printf("注册成功！您的卡号为：\n");	
+				int i;				
+				for(i=0;i<19;i++)
+				{
+									
+					acc.acc=rand()%9;
+					printf("%s",acc);
+					
+				}
+				j=1;
+			}
+			else
+			{
+				show_str("两次输入不符，请重新输入",0.5);
+				return;
+			}			
+		}
+		strcpy(acc.acc,acc);
+		strcpy(acc.id,id);
+		acc.pw=pw1;
+		acc.money = money;
+		acc.id2 = {};
+		acc.to_money = 0;
+		
+}
+//销户
+void xiaohu(void)                                                  //删除学生
+{	
+		
+	for(;;)
+	{
+		system("clear");
+		int i=0;					                                 //比对信息
+		char key[19];
+		printf("请输入要注销的账号：");
+		scanf("%s",&key);
+		do
+		{
+			
+				if(strcmp(acc.acc,key)==0)
+				{
+					break;
+				}
+			
+		}
+		while(++i<100);
+		if(i<100)
+		{
+			int key1;
+			printf("请输入密码，确认要注销的账号：");
+			scanf("%d",&key1);
+			if(acc.pw==key1)
+			{		
+				/*    服务器询问是否销户      */				
+				show_str("注销帐号成功",0.5);
+							
+				acc.acc={};
+				acc.pw=0;
+				acc.id={};
+				acc.money=0;
+				anykey_continue();
+			}
+		}
+		else
+		{
+			show_str("找不到该账号",0.5);
+			return;
+		}
+	
+	}
+}
+//登陆后的界面
+void show(void)
+{
+	system("clear");
+	printf("----------用户----------\n");
+	printf("1.存钱\n");
+	printf("2.取钱\n");
+	printf("3.转帐\n");
+	printf("4.查询余额\n");
+	printf("5.修改密码\n");
+}	
+
+
+void if_success(int key)		// 判断登录是否成功
+{
+		
+	int chance=0;	
+	if(chance<3)
+	{
+		if(key==acc.pw)
+		{
+			printf("登录成功！\n");
+			chance=0;
+			link2();
+			return;				
+		}
+		else
+		{
+			show_str("密码错误",0.5);
+			chance++;
+			if(0==2-chance) acc.pw=-1;
+		}
+	}
+	if(chance>=3)
+	{
+		show_str("该账户已锁定，请解锁",0.5);
+		return ;	
+	}
+	
+}
+
+void sign(void)		// 登录界面
+{
+		
+	char acc[19];
+	int key;	
+	for(;;)
+	{
+		system("clear");
+		printf("----------指针银行----------\n");
+		printf("请输入账号\n");
+		scanf("%s",acc);
+		if(strlen(acc)!=19||/*不存在*/)
+		{
+			show_str("帐号错误，请重新输入",0.5);
+			return ;	
+		}
+		if(/*帐号存在*/)
+		{
+			printf("请输入密码\n");
+			scanf("%d",&key);
+			if_success();
+		}
+		
+	}
+}
+
+//解锁
+void unlock(void)
+{
+		
+	char acc[19];
+	char id[18];
+	int key;	
+	printf("请输入要解锁的账号：");
+	scanf("%s",acc);	
+	if(acc==acc.acc && strlen(acc)==19)
+	{
+		printf("请输入身份证号码解锁：");
+		scanf("%s",id);
+		if(strcmp(id,acc.id)==0)
+		{
+			printf("解锁成功，请重新设置密码：");
+			scanf("%d",&key);
+			if(key<0||key>1000000)
+			{
+				show_str("密码非法，请重新输入",0.5);
+				return ;
+			}
+			else acc.pw=key;
+
+		}
+		else
+		{
+			show_str("身份证号码有误，请重新输入",0.5);
+			return ;
+		}		
+	}
+	else
+	{
+		show_str("帐号输入有误，请重新输入",0.5);
+		return ;		
+	}		
+}
+//初始界面
+void show2(void)
+{
+	system("clear");
+	printf("----------指针银行----------\n");
+	printf("请选择您的操作\n");
+	printf("1.登录\n");
+	printf("2.开户\n");
+	printf("3.销户\n");
+	printf("4.解锁\n");
+}
+//初始界面功能链接1
+void link1(void)
+{
+	show2();
+	int zhiling;
+	scanf("%d",&zhiling);	
+	switch(zhiling)
+	{
+		case 1: sign();break;
+		case 2: kaihu();break;
+		case 3: xiaohu();break;
+		case 4: unlock();break;
+	}
+}
+//存钱
+void save(void)
+{
+		
+	int money;	
+	printf("请输入您想要存储的金额：");
+	scanf("%d",&money);
+	if(money>0)
+	{
+		acc.to_money=money;
+		show_str("存储成功",0.5);
+		return ;
+	}
+	else
+	{
+		show_str("金额非法，请重新输入",0.5);
+		return ;		
+	}
+}
+//取钱
+void take(void)
+{
+	
+	int money;
+	printf("请输入想取出的金额：");
+	scanf("%d",&money);
+	if(money>0&&money<acc.money)
+	{
+		acc.to_money=0-money;		
+		show_str("取出成功。",0.5);
+		return;
+	}
+	else
+	{
+		show_str("金额非法，请重新输入",0.5);
+		return ;
+	}
+}
+//查询
+void search(void)
+{
+	printf("您的余额为%d元。",acc.money);
+	anykey_continue();
+}
+//修改密码
+void change(void)
+{
+	
+	int key1,key2;
+	printf("请输入原密码确认操作：");
+	scanf("%d",&key1);
+	if(key1==acc.pw)
+	{
+		printf("请输入新的密码：");
+		scanf("%d",&key2);
+		if(key2<0||key2>1000000)
+		{
+			show_str("密码非法，请重新输入",0.5);
+			return ;		
+		}
+		else 
+		{
+			acc.pw=key2;
+			show_str("修改成功",0.5);
+			return ;	
+		}
+	}
+}
+//转帐
+void zhuanzhang(void)
+{
+	
+	char key[19];
+	int to_money;	
+	int cnt=0;	
+	printf("请输入对方的帐号：");
+	scanf("%s",key);
+	if(strlen(key)==19)
+	{
+		int i;		
+		for(i=0;i<19;i++)
+		{
+			if(key[i]<0)
+			{
+				cnt=1;				
+				show_str("目标账号非法",0.5);
+				return ;	
+			}
+		}
+		if(cnt==0)
+		{
+			printf("请输入转账金额：");
+			scanf("%d",&to_money);
+			if(to_money>acc.money||to_money<0)
+			{
+				show_str("金额非法",0.5);
+				return ;
+			}
+			else
+			{
+				acc.money=acc.money-to_money;
+				//目标账户金额加to_money				
+				show_str("转帐成功",0.5);
+				return ;
+			}	
+		}
+	}
+}
+
+//登陆后界面功能链接2
+void link2(void)
+{
+	show();
+	int zhiling;
+	scanf("%d",&zhiling);	
+	switch(zhiling)
+	{
+		case 1: save();break;
+		case 2: take();break;
+		case 3: zhuanzhang();break;
+		case 4: search();break;
+		case 5: change();break;
+	}
+}

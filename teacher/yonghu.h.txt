@@ -1,0 +1,31 @@
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
+#include <stdlib.h>
+#include <unistd.h>
+#include<string.h>
+typedef struct account
+{
+	char acc[19];
+	char id[18];
+	int pw;
+	int money;
+	char acc2[19];
+	int to_money;	
+}account;
+void show_str(const char* str,int time);
+void anykey_continue(void);
+void kaihu(void);
+void xiaohu(void);
+void show(void);
+void if_success(int i,const char* key);
+void sign(void);
+void unlock(void);
+void show2(void);
+void link1(void);
+void save(void);
+void take(void);
+void search(void);
+void change(void);
+void zhuanzhang(void);
+void link2(void);
+#endif//ACCOUNT_H

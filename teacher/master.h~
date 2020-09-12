@@ -1,0 +1,6 @@
+#ifndef MASTER_H
+#define MASTER_H
+void master(void);
+void master_show(void);
+
+#endif //MASTER_H
